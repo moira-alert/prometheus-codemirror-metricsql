@@ -1,6 +1,6 @@
 {
   "name": "@clavinjune/lezer-metricsql",
-  "version": "0.0.1-dev.2909230002",
+  "version": "0.0.1-dev.2909230003",
   "description": "lezer-based MetricsQL grammar",
   "main": "dist/index.cjs",
   "type": "module",
