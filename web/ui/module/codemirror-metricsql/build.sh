@@ -13,39 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -ex
 
-if ! [[ -w  $HOME ]]
-then
-  export npm_config_cache=$(mktemp -d)
-fi
-
-buildOrder=(lezer-metricsql codemirror-metricsql)
-
-function buildModule() {
-  for module in "${buildOrder[@]}"; do
-    echo "build ${module}"
-    npm run build -w "@clavinjune/${module}"
-  done
-}
-
-function buildReactApp() {
-  echo "build react-app"
-  npm run build -w @prometheus-io/app
-  rm -rf ./static/react
-  mv ./react-app/build ./static/react
-}
-
-for i in "$@"; do
-  case ${i} in
-  --all)
-    buildModule
-    buildReactApp
-    shift
-    ;;
-  --build-module)
-    buildModule
-    shift
-    ;;
-  esac
-done
+# build the lib (both ES2015 and CommonJS)
+tsc --module esnext --target es2018 --outDir dist/esm
+tsc --module commonjs --target es5 --outDir dist/cjs --downlevelIteration

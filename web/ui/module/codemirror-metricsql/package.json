@@ -1,0 +1,65 @@
+{
+  "name": "@clavinjune/codemirror-metricsql",
+  "version": "0.0.1-dev.2909230002",
+  "description": "a CodeMirror mode for the MetricsQL language",
+  "types": "dist/esm/index.d.ts",
+  "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.js",
+  "scripts": {
+    "build": "npm run build:lib",
+    "build:lib": "bash ./build.sh",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
+    "lint": "eslint src/ --ext .ts",
+    "lint:fix": "eslint --fix src/ --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clavinjune/prometheus-codemirror-metricsql.git"
+  },
+  "keywords": [
+    "promql",
+    "metriscql",
+    "codemirror",
+    "mode",
+    "prometheus",
+    "victoriametrics"
+  ],
+  "author": "Clavin June <juneardoc@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/clavinjune/prometheus-codemirror-metricsql/issues"
+  },
+  "homepage": "https://github.com/clavinjune/prometheus-codemirror-metricsql/blob/main/web/ui/module/codemirror-metricsql/README.md",
+  "dependencies": {
+    "@clavinjune/lezer-metricsql": "0.0.1-dev.2909230002",
+    "lru-cache": "^7.18.3"
+  },
+  "devDependencies": {
+    "@codemirror/autocomplete": "^6.7.1",
+    "@codemirror/language": "^6.7.0",
+    "@codemirror/lint": "^6.2.2",
+    "@codemirror/state": "^6.2.1",
+    "@codemirror/view": "^6.13.0",
+    "@lezer/common": "^1.0.3",
+    "@lezer/highlight": "^1.1.6",
+    "@lezer/lr": "^1.3.6",
+    "isomorphic-fetch": "^3.0.0",
+    "nock": "^13.3.1"
+  },
+  "peerDependencies": {
+    "@codemirror/autocomplete": "^6.7.1",
+    "@codemirror/language": "^6.3.7",
+    "@codemirror/lint": "^6.2.2",
+    "@codemirror/state": "^6.2.1",
+    "@codemirror/view": "^6.13.0",
+    "@lezer/common": "^1.0.3"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 150
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

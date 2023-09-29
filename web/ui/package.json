@@ -10,7 +10,7 @@
   },
   "workspaces": [
     "react-app",
-    "module/*"
+    "module/*-metricsql"
   ],
   "engines": {
     "npm": ">=7.0.0"
