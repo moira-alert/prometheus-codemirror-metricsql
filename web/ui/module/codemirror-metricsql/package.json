@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/clavinjune/prometheus-codemirror-metricsql/blob/main/web/ui/module/codemirror-metricsql/README.md",
   "dependencies": {
-    "@clavinjune/lezer-metricsql": "0.0.1-dev.2909230002",
+    "@clavinjune/lezer-metricsql": "0.0.1-dev.2909230003",
     "lru-cache": "^7.18.3"
   },
   "devDependencies": {
