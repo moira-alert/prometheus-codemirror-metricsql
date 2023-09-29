@@ -16,6 +16,8 @@ import { SyntaxNode, Tree } from '@lezer/common';
 import {
   AggregateExpr,
   And,
+  Any,
+  Avg,
   BinaryExpr,
   BoolModifier,
   Bottomk,
@@ -24,20 +26,30 @@ import {
   BottomkMax,
   BottomkMedian,
   BottomkMin,
+  Count,
   CountValues,
+  Distinct,
   Eql,
   EqlSingle,
   FunctionCall,
   FunctionCallBody,
+  Geomean,
+  Group,
   Gte,
   Gtr,
+  Histogram,
   Identifier,
   LabelMatcher,
   LabelMatchers,
   Limitk,
   Lss,
   Lte,
+  Mad,
   MatrixSelector,
+  Max,
+  Median,
+  Min,
+  Mode,
   Neq,
   Or,
   Outliersk,
@@ -45,8 +57,13 @@ import {
   ParenExpr,
   Quantile,
   Quantiles,
+  Share,
+  Stddev,
+  Stdvar,
   StepInvariantExpr,
   SubqueryExpr,
+  Sum,
+  Sum2,
   Topk,
   TopkAvg,
   TopkLast,
@@ -56,6 +73,7 @@ import {
   UnaryExpr,
   Unless,
   VectorSelector,
+  Zscore,
 } from '@clavinjune/lezer-metricsql';
 import { containsAtLeastOneChild } from './path-finder';
 import { getType } from './type';
@@ -189,9 +207,17 @@ export class Parser {
         aggregateOp.type.id === TopkLast ||
         aggregateOp.type.id === TopkMin
     ) {
+      if (params.length < 2 || params.length > 3) {
+        this.addDiagnostic(node, 'unable to find the parameter for the expression');
+        return;
+      }
+
       this.expectType(params[0], ValueType.scalar, 'aggregation parameter');
       this.expectType(params[1], ValueType.vector, 'aggregation parameter');
-      this.expectType(params[2], ValueType.string, 'aggregation parameter');
+
+      if (params.length === 3) {
+        this.expectType(params[2], ValueType.string, 'aggregation parameter');
+      }
       return
     }
 
@@ -199,6 +225,10 @@ export class Parser {
         aggregateOp.type.id === OutliersMad ||
         aggregateOp.type.id === Outliersk
     ) {
+      if (params.length != 2) {
+        this.addDiagnostic(node, 'unable to find the parameter for the expression');
+        return;
+      }
       this.expectType(params[0], ValueType.scalar, 'aggregation parameter');
     }
 
@@ -208,14 +238,48 @@ export class Parser {
         this.expectType(params[i], ValueType.scalar, 'aggregation parameter');
       }
     }
+
+    if (aggregateOp.type.id === Any ||
+        aggregateOp.type.id === Avg ||
+        aggregateOp.type.id === Count ||
+        aggregateOp.type.id === Distinct ||
+        aggregateOp.type.id === Geomean ||
+        aggregateOp.type.id === Group ||
+        aggregateOp.type.id === Histogram ||
+        aggregateOp.type.id === Mad ||
+        aggregateOp.type.id === Max ||
+        aggregateOp.type.id === Median ||
+        aggregateOp.type.id === Min ||
+        aggregateOp.type.id === Mode ||
+        aggregateOp.type.id === Share ||
+        aggregateOp.type.id === Stddev ||
+        aggregateOp.type.id === Stdvar ||
+        aggregateOp.type.id === Sum ||
+        aggregateOp.type.id === Sum2 ||
+        aggregateOp.type.id === Sum2 ||
+        aggregateOp.type.id === Zscore
+    ) {
+      if (params.length != 1) {
+        this.addDiagnostic(node, 'unable to find the parameter for the expression');
+        return;
+      }
+    }
     // metricsql end here
 
     this.expectType(params[params.length - 1], ValueType.vector, 'aggregation expression');
     // get the parameter of the aggregation operator
     if (aggregateOp.type.id === Topk || aggregateOp.type.id === Bottomk || aggregateOp.type.id === Quantile) {
+      if (params.length != 2) {
+        this.addDiagnostic(node, 'unable to find the parameter for the expression');
+        return;
+      }
       this.expectType(params[0], ValueType.scalar, 'aggregation parameter');
     }
     if (aggregateOp.type.id === CountValues) {
+      if (params.length != 2) {
+        this.addDiagnostic(node, 'unable to find the parameter for the expression');
+        return;
+      }
       this.expectType(params[0], ValueType.string, 'aggregation parameter');
     }
   }

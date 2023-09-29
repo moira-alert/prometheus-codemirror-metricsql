@@ -1,8 +1,8 @@
-CodeMirror-promql
+CodeMirror-metricsql
 =================
 
 This project provides a mode for [CodeMirror](https://codemirror.net/6/) that handles syntax highlighting, linting
-and autocompletion for PromQL ([Prometheus Query Language](https://prometheus.io/docs/introduction/overview/)).
+and autocompletion for MetricsQL ([VictoriaMetrics Query Language](https://docs.victoriametrics.com/MetricsQL.html)).
 
 ![preview](https://user-images.githubusercontent.com/4548045/95660829-d5e4b680-0b2a-11eb-9ecb-41dca6396273.gif)
 
@@ -11,7 +11,7 @@ and autocompletion for PromQL ([Prometheus Query Language](https://prometheus.io
 This mode is available as a npm package:
 
 ```bash
-npm install --save @prometheus-io/codemirror-promql
+npm install --save @clavinjune/codemirror-metricsql
 ```
 
 **Note:** You will have to manually install different packages that are part
@@ -38,7 +38,7 @@ npm install --save @codemirror/basic-setup
 
 ## Usage
 
-As the setup of the PromQL language can a bit tricky in CMN, this lib provides a class `PromQLExtension`
+As the setup of the MetricsQL language can a bit tricky in CMN, this lib provides a class `PromQLExtension`
 which is here to help you to configure the different extensions we aim to provide.
 
 ### Default setup
@@ -47,7 +47,7 @@ If you want to enjoy about the different features provided without taking too mu
 them, then the easiest way is this one:
 
 ```typescript
-import {PromQLExtension} from '@prometheus-io/codemirror-promql';
+import {PromQLExtension} from '@clavinjune/codemirror-metricsql';
 import {basicSetup} from '@codemirror/basic-setup';
 import {EditorState} from '@codemirror/state';
 import {EditorView} from '@codemirror/view';

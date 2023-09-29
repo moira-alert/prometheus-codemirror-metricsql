@@ -1,6 +1,6 @@
 {
   "name": "@clavinjune/codemirror-metricsql",
-  "version": "0.0.1-dev.2909230002",
+  "version": "0.0.1-dev.2909230004",
   "description": "a CodeMirror mode for the MetricsQL language",
   "types": "dist/esm/index.d.ts",
   "module": "dist/esm/index.js",
