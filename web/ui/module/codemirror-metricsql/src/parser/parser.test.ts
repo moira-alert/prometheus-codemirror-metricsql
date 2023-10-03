@@ -594,7 +594,7 @@ describe('promql operations', () => {
     // Test function calls.
     {
       expr: 'time()',
-      expectedValueType: ValueType.scalar,
+      expectedValueType: ValueType.vector,
       expectedDiag: [],
     },
     {
@@ -679,7 +679,7 @@ describe('promql operations', () => {
     },
     {
       expr: 'time(some_metric)',
-      expectedValueType: ValueType.scalar,
+      expectedValueType: ValueType.vector,
       expectedDiag: [
         {
           from: 0,
@@ -829,6 +829,46 @@ describe('promql operations', () => {
       expectedValueType: ValueType.vector,
       expectedDiag: [],
     },
+    {
+      expr: 'label_move(foobar, "label_a", "a", "label_b", "b")',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
+    {
+      expr: 'aggr_over_time("min_over_time", m[d])',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
+    {
+      expr: 'count_eq_over_time(round(5*rand(0))[200s:10s], 1)',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
+    {
+      expr: 'round(5*rand(0))',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
+    {
+      expr: 'rand(0)',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
+    {
+      expr: 'label_set(rand(), "foo", "baz")',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
+    {
+      expr: 'drop_common_labels(label_set(rand(), "foo", "bar", "__name__", "xxx", "q", "we"))',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
+    {
+      expr: 'duration_over_time((rand()<1200)[600s:10s], 20s)',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    }
   ];
   testCases.forEach((value) => {
     const state = createEditorState(value.expr);
