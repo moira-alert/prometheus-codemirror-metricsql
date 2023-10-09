@@ -23,10 +23,12 @@ import {
   StepInvariantExpr,
   StringLiteral,
   SubqueryExpr,
+  Sum2OverTime,
   UnaryExpr,
   VectorSelector,
 } from '@clavinjune/lezer-metricsql';
 import { getFunction, ValueType } from '../types';
+import { isFunctionBypassed } from '../types/function';
 
 // Based on https://github.com/prometheus/prometheus/blob/d668a7efe3107dbdcc67bf4e9f12430ed8e2b396/promql/parser/ast.go#L191
 export function getType(node: SyntaxNode | null): ValueType {
@@ -63,6 +65,9 @@ export function getType(node: SyntaxNode | null): ValueType {
       const funcNode = node.firstChild?.firstChild;
       if (!funcNode) {
         return ValueType.none;
+      }
+      if (isFunctionBypassed(funcNode.type.id)) {
+        return ValueType.none
       }
       return getFunction(funcNode.type.id).returnType;
     case StepInvariantExpr:

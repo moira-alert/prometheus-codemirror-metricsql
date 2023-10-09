@@ -868,6 +868,22 @@ describe('promql operations', () => {
       expr: 'duration_over_time((rand()<1200)[600s:10s], 20s)',
       expectedValueType: ValueType.vector,
       expectedDiag: [],
+    },
+    {
+      expr: 'histogram_avg(sum(histogram_over_time(response_time_duration_seconds[5m])) by (vmrange,job))',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
+    // bypassed until supported
+    {
+      expr: 'histogram_quantiles("le", 0.3, 0.5, sum(rate(http_request_duration_seconds_bucket[5m]) by (le))',
+      expectedValueType: ValueType.none,
+      expectedDiag: [],
+    },
+    {
+      expr: 'sum2_over_time(asd{})',
+      expectedValueType: ValueType.none,
+      expectedDiag: [],
     }
   ];
   testCases.forEach((value) => {

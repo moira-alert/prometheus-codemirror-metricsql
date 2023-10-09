@@ -64,6 +64,7 @@ import {
   SubqueryExpr,
   Sum,
   Sum2,
+  Sum2OverTime,
   Topk,
   TopkAvg,
   TopkLast,
@@ -82,6 +83,7 @@ import { EditorState } from '@codemirror/state';
 import { syntaxTree } from '@codemirror/language';
 import { getFunction, Matcher, VectorMatchCardinality, ValueType } from '../types';
 import { buildVectorMatching } from './vector';
+import { isFunctionBypassed } from '../types/function';
 
 export class Parser {
   private readonly tree: Tree;
@@ -353,6 +355,10 @@ export class Parser {
     if (!funcID) {
       this.addDiagnostic(node, 'function not defined');
       return;
+    }
+
+    if (isFunctionBypassed(funcID.type.id)) {
+      return
     }
 
     const body = node.getChild(FunctionCallBody);

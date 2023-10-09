@@ -57,38 +57,124 @@ import {
   DropCommonLabels,
   DurationOverTime,
   Exp,
+  FirstOverTime,
   Floor,
   FunctionCall,
+  GeomeanOverTime,
+  HistogramAvg,
   HistogramCount,
   HistogramFraction,
+  HistogramOverTime,
   HistogramQuantile,
+  HistogramQuantiles,
+  HistogramShare,
   HistogramStdDev,
   HistogramStdVar,
   HistogramSum,
+  HoeffdingBoundLower,
+  HoeffdingBoundUpper,
   HoltWinters,
   Hour,
   Idelta,
+  Ideriv,
   Increase,
+  IncreasePrometheus,
+  IncreasePure,
+  IncreasesOverTime,
+  Integrate,
+  Interpolate,
   Irate,
+  KeepLastValue,
+  KeepNextValue,
+  LabelCopy,
+  LabelDel,
+  LabelGraphiteGroup,
   LabelJoin,
+  LabelKeep,
+  LabelLowercase,
+  LabelMap,
+  LabelMatch,
+  LabelMismatch,
   LabelMove,
   LabelReplace,
   LabelSet,
+  LabelTransform,
+  LabelUppercase,
+  LabelValue,
+  Lag,
   LastOverTime,
+  Lifetime,
+  LimitOffset,
   Ln,
   Log10,
   Log2,
+  MadOverTime,
   MaxOverTime,
+  MedianOverTime,
   MinOverTime,
   Minute,
+  ModeOverTime,
   Month,
   Now,
   Pi,
   PredictLinear,
   PresentOverTime,
+  PrometheusBuckets,
   QuantileOverTime,
+  QuantilesOverTime,
   Rad,
   Rand,
+  RandExponential,
+  RandNormal,
+  RangeAvg,
+  RangeFirst,
+  RangeLast,
+  RangeLinearRegression,
+  RangeMad,
+  RangeMax,
+  RangeMin,
+  RangeNormalize,
+  RangeOverTime,
+  RangeQuantile,
+  RangeStddev,
+  RangeStdvar,
+  RangeSum,
+  RangeTrimOutliers,
+  RangeTrimSpikes,
+  RangeTrimZscore,
+  RangeZscore,
+  RateOverSum,
+  RemoveResets,
+  Rollup,
+  RollupCandlestick,
+  RollupDelta,
+  RollupDeriv,
+  RollupIncrease,
+  RollupRate,
+  RollupScrapeInterval,
+  RunningAvg,
+  RunningMax,
+  RunningMin,
+  RunningSum,
+  ScrapeInterval,
+  ShareEqOverTime,
+  ShareGtOverTime,
+  ShareLeOverTime,
+  SmoothExponential,
+  SortByLabel,
+  SortByLabelDesc,
+  SortByLabelNumeric,
+  SortByLabelNumericDesc,
+  StaleSamplesOverTime,
+  Step,
+  TfirstOverTime,
+  TimestampWithName,
+  TimezoneOffset,
+  TlastChangeOverTime,
+  TlastOverTime,
+  TmaxOverTime,
+  TminOverTime,
+  Union,
   Rate,
   Resets,
   Round,
@@ -101,6 +187,7 @@ import {
   Sqrt,
   StddevOverTime,
   StdvarOverTime,
+  Sum2OverTime,
   SumOverTime,
   Tan,
   Tanh,
@@ -108,6 +195,7 @@ import {
   Timestamp,
   Vector,
   Year,
+  ZscoreOverTime,
 } from '@clavinjune/lezer-metricsql';
 
 export enum ValueType {
@@ -677,6 +765,78 @@ const promqlFunctions: { [key: number]: PromQLFunction } = {
     variadic: 0,
     returnType: ValueType.vector,
   },
+  [FirstOverTime]: {
+    name: 'first_over_time',
+    argTypes: [ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [GeomeanOverTime]: {
+    name: 'geomean_over_time',
+    argTypes: [ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [HistogramAvg]: {
+    name: 'histogram_avg',
+    argTypes: [ValueType.vector],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [HistogramOverTime]: {
+    name: 'histogram_over_time',
+    argTypes: [ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [HistogramShare]: {
+    name: 'histogram_share',
+    argTypes: [ValueType.scalar, ValueType.vector],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [HoeffdingBoundLower]: {
+    name: 'hoeffding_bound_lower',
+    argTypes: [ValueType.scalar, ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [HoeffdingBoundUpper]: {
+    name: 'hoeffding_bound_upper',
+    argTypes: [ValueType.scalar, ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [HoltWinters]: {
+    name: 'holt_winters',
+    argTypes: [ValueType.matrix, ValueType.scalar, ValueType.scalar],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [Ideriv]: {
+    name: 'ideriv',
+    argTypes: [ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [IncreasePrometheus]: {
+    name: 'increase_prometheus',
+    argTypes: [ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [IncreasePure]: {
+    name: 'increase_pure',
+    argTypes: [ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [IncreasesOverTime]: {
+    name: 'increases_over_time',
+    argTypes: [ValueType.matrix],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
   // todo
   [LabelMove]: {
     name: 'label_move',
@@ -706,4 +866,84 @@ const promqlFunctions: { [key: number]: PromQLFunction } = {
 
 export function getFunction(id: number): PromQLFunction {
   return promqlFunctions[id];
+}
+
+export function isFunctionBypassed(id: number): boolean {
+  return id === HistogramQuantiles ||
+    id === Integrate ||
+    id === Interpolate ||
+    id === KeepLastValue ||
+    id === KeepNextValue ||
+    id === LabelCopy ||
+    id === LabelDel ||
+    id === LabelGraphiteGroup ||
+    id === LabelKeep ||
+    id === LabelLowercase ||
+    id === LabelMap ||
+    id === LabelMatch ||
+    id === LabelMismatch ||
+    id === LabelTransform ||
+    id === LabelUppercase ||
+    id === LabelValue ||
+    id === Lag ||
+    id === Lifetime ||
+    id === LimitOffset ||
+    id === MadOverTime ||
+    id === MedianOverTime ||
+    id === ModeOverTime ||
+    id === PrometheusBuckets ||
+    id === QuantilesOverTime ||
+    id === RandExponential ||
+    id === RandNormal ||
+    id === RangeAvg ||
+    id === RangeFirst ||
+    id === RangeLast ||
+    id === RangeLinearRegression ||
+    id === RangeMad ||
+    id === RangeMax ||
+    id === RangeMin ||
+    id === RangeNormalize ||
+    id === RangeOverTime ||
+    id === RangeQuantile ||
+    id === RangeStddev ||
+    id === RangeStdvar ||
+    id === RangeSum ||
+    id === RangeTrimOutliers ||
+    id === RangeTrimSpikes ||
+    id === RangeTrimZscore ||
+    id === RangeZscore ||
+    id === RateOverSum ||
+    id === RemoveResets ||
+    id === Rollup ||
+    id === RollupCandlestick ||
+    id === RollupDelta ||
+    id === RollupDeriv ||
+    id === RollupIncrease ||
+    id === RollupRate ||
+    id === RollupScrapeInterval ||
+    id === RunningAvg ||
+    id === RunningMax ||
+    id === RunningMin ||
+    id === RunningSum ||
+    id === ScrapeInterval ||
+    id === ShareEqOverTime ||
+    id === ShareGtOverTime ||
+    id === ShareLeOverTime ||
+    id === SmoothExponential ||
+    id === SortByLabel ||
+    id === SortByLabelDesc ||
+    id === SortByLabelNumeric ||
+    id === SortByLabelNumericDesc ||
+    id === StaleSamplesOverTime ||
+    id === Step ||
+    id === Sum2OverTime ||
+    id === TfirstOverTime ||
+    id === TimestampWithName ||
+    id === TimezoneOffset ||
+    id === TlastChangeOverTime ||
+    id === TlastOverTime ||
+    id === TmaxOverTime ||
+    id === TminOverTime ||
+    id === Union ||
+    id === ZscoreOverTime
 }
