@@ -196,6 +196,11 @@ import {
   Vector,
   Year,
   ZscoreOverTime,
+  AvgDaily,
+  MedianDaily,
+  AvgWeekly,
+  MedianWeekly,
+  MedianWeeklyWithTrends,
 } from '@clavinjune/lezer-metricsql';
 
 export enum ValueType {
@@ -860,6 +865,37 @@ const promqlFunctions: { [key: number]: PromQLFunction } = {
     name: 'rand',
     argTypes: [ValueType.scalar],
     variadic: 1,
+    returnType: ValueType.vector,
+  },
+  // custom transform function
+  [AvgDaily]: {
+    name: 'avg_daily',
+    argTypes: [ValueType.scalar, ValueType.vector],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [MedianDaily]: {
+    name: 'median_daily',
+    argTypes: [ValueType.scalar, ValueType.vector],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [AvgWeekly]: {
+    name: 'avg_weekly',
+    argTypes: [ValueType.scalar, ValueType.vector],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [MedianWeekly]: {
+    name: 'median_weekly',
+    argTypes: [ValueType.scalar, ValueType.vector],
+    variadic: 0,
+    returnType: ValueType.vector,
+  },
+  [MedianWeeklyWithTrends]: {
+    name: 'median_weekly_with_trends',
+    argTypes: [ValueType.scalar, ValueType.vector],
+    variadic: 0,
     returnType: ValueType.vector,
   },
 };

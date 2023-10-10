@@ -314,7 +314,13 @@ FunctionIdentifier {
   TmaxOverTime |
   TminOverTime |
   Union |
-  ZscoreOverTime
+  ZscoreOverTime |
+  // custom transform function
+  AvgDaily |
+  MedianDaily |
+  AvgWeekly |
+  MedianWeekly |
+  MedianWeeklyWithTrends
 }
 
 FunctionCallBody {
@@ -682,6 +688,12 @@ NumberLiteral  {
   TminOverTime { condFn<"tmin_over_time"> }
   Union { condFn<"union"> }
   ZscoreOverTime { condFn<"zscore_over_time"> }
+  // custom transform function
+  AvgDaily { condFn<"avg_daily"> }
+  MedianDaily { condFn<"median_daily"> }
+  AvgWeekly { condFn<"avg_weekly"> }
+  MedianWeekly { condFn<"median_weekly"> }
+  MedianWeeklyWithTrends { condFn<"median_weekly_with_trends"> }
 
 // Conditional function names (only parsed as function names when used as such).
 condFn<term> { @extend<Identifier, term> }

@@ -874,6 +874,12 @@ describe('promql operations', () => {
       expectedValueType: ValueType.vector,
       expectedDiag: [],
     },
+    // custom transform function
+    {
+      expr: 'avg_daily(3, sum(increase(istio_requests_total{job="envoy-stats", app="gopaysh-istio-internal-gateway", cluster_name="goku-eks-production-01"}[10m])))',
+      expectedValueType: ValueType.vector,
+      expectedDiag: [],
+    },
     // bypassed until supported
     {
       expr: 'histogram_quantiles("le", 0.3, 0.5, sum(rate(http_request_duration_seconds_bucket[5m]) by (le))',
