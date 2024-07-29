@@ -205,6 +205,7 @@ FunctionIdentifier {
 
   // metricsql
   AggrOverTime |
+  Alias |
   AscentOverTime |
   BitmapAnd |
   BitmapOr |
@@ -578,6 +579,7 @@ NumberLiteral  {
 
   // metricsql
   AggrOverTime { condFn<"aggr_over_time"> }
+  Alias { condFn<"alias">}
   AscentOverTime { condFn<"ascent_over_time"> }
   BitmapAnd { condFn<"bitmap_and"> }
   BitmapOr { condFn<"bitmap_or"> }

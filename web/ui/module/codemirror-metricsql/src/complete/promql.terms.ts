@@ -495,6 +495,12 @@ export const functionIdentifierTerms = [
     type: 'function',
   },
   {
+    label: 'alias',
+    detail: 'function',
+    info: 'https://docs.victoriametrics.com/MetricsQL.html#alias',
+    type: 'function',
+  },
+  {
     label: 'ascent_over_time',
     detail: 'function',
     info: 'https://docs.victoriametrics.com/MetricsQL.html#ascent_over_time',
