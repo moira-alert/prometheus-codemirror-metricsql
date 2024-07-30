@@ -18,6 +18,7 @@ import {
   Acos,
   Acosh,
   AggrOverTime,
+  Alias,
   AscentOverTime,
   Asin,
   Asinh,
@@ -905,7 +906,7 @@ export function getFunction(id: number): PromQLFunction {
 }
 
 export function isFunctionBypassed(id: number): boolean {
-  return id === HistogramQuantiles ||
+  return id === Alias || id === HistogramQuantiles ||
     id === Integrate ||
     id === Interpolate ||
     id === KeepLastValue ||
