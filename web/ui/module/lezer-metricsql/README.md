@@ -6,11 +6,7 @@ This is a PromQL grammar for the [lezer](https://lezer.codemirror.net/) parser s
 grammar coming from [Prometheus](https://github.com/prometheus/prometheus/blob/main/promql/parser/generated_parser.y)
 written in yacc.
 
-This library is stable but doesn't provide any guideline of how to use it as it has been integrated
-into [codemirror-metricsql](https://github.com/clavinjune/prometheus-codemirror-metricsql/blob/main/web/ui/module/codemirror-metricsql). If you
-want to use this library, you perhaps want to actually use **@clavinjune/codemirror-metricsql** instead.
-
-**Note**: This library is a lezer-based implementation of the [authoritative, goyacc-based PromQL grammar](https://github.com/prometheus/prometheus/blob/main/promql/parser/generated_parser.y). 
+**Note**: This library is a lezer-based implementation of the [authoritative, goyacc-based PromQL grammar](https://github.com/prometheus/prometheus/blob/main/promql/parser/generated_parser.y).
 Any changes to the authoritative grammar need to be reflected in this package as well.
 
 ## Installation
@@ -18,7 +14,7 @@ Any changes to the authoritative grammar need to be reflected in this package as
 This package is available as an npm package:
 
 ```bash
-npm install --save @clavinjune/lezer-metricsql
+npm install --save @skbkontur-moira/lezer-metricsql
 ```
 
 **Note**: you will have to manually install the `lezer` dependencies as it is a peer dependency to this package.
@@ -37,7 +33,3 @@ npm install --save @lezer/lr @lezer/highlight
 ### Testing
 
     npm run test
-
-## License
-
-The code is licensed under an [Apache 2.0](https://github.com/clavinjune/prometheus-codemirror-metricsql/blob/main/LICENSE) license.

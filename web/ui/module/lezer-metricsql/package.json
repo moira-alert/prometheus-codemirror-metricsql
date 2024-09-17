@@ -1,6 +1,6 @@
 {
-  "name": "@clavinjune/lezer-metricsql",
-  "version": "0.0.1-dev.3007240001",
+  "name": "@skbkontur-moira/lezer-metricsql",
+  "version": "0.0.1-dev.1809240003",
   "description": "lezer-based MetricsQL grammar",
   "main": "dist/index.cjs",
   "type": "module",
@@ -10,21 +10,16 @@
   },
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
-  "author": "Clavin June <juneardoc@gmail.com>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clavinjune/prometheus-codemirror-metricsql.git"
+    "url": "git+https://github.com/moira-alert/prometheus-codemirror-metricsql.git"
   },
   "keywords": [
     "lezer",
     "promql",
     "metricsql"
   ],
-  "bugs": {
-    "url": "https://github.com/clavinjune/prometheus-codemirror-metricsql/issues"
-  },
-  "homepage": "https://github.com/clavinjune/prometheus-codemirror-metricsql/blob/main/web/ui/module/lezer-metricsql/README.md",
   "scripts": {
     "build": "bash ./build.sh",
     "lint": "echo 'nothing to do'",

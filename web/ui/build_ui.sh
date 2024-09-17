@@ -25,7 +25,7 @@ buildOrder=(lezer-metricsql codemirror-metricsql)
 function buildModule() {
   for module in "${buildOrder[@]}"; do
     echo "build ${module}"
-    npm run build -w "@clavinjune/${module}"
+    npm run build -w "@skbkontur-moira/${module}"
   done
 }
 

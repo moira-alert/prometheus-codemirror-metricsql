@@ -26,7 +26,7 @@ import {
   Sum2OverTime,
   UnaryExpr,
   VectorSelector,
-} from '@clavinjune/lezer-metricsql';
+} from '@skbkontur-moira/lezer-metricsql';
 import { getFunction, ValueType } from '../types';
 import { isFunctionBypassed } from '../types/function';
 
@@ -67,7 +67,7 @@ export function getType(node: SyntaxNode | null): ValueType {
         return ValueType.none;
       }
       if (isFunctionBypassed(funcNode.type.id)) {
-        return ValueType.none
+        return ValueType.none;
       }
       return getFunction(funcNode.type.id).returnType;
     case StepInvariantExpr:

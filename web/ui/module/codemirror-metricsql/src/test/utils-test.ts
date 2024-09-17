@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { parser } from '@clavinjune/lezer-metricsql';
+import { parser } from '@skbkontur-moira/lezer-metricsql';
 import { EditorState } from '@codemirror/state';
 import { LRLanguage } from '@codemirror/language';
 import nock from 'nock';

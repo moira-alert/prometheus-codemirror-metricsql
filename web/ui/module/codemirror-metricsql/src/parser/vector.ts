@@ -24,7 +24,7 @@ import {
   On,
   Or,
   Unless,
-} from '@clavinjune/lezer-metricsql';
+} from '@skbkontur-moira/lezer-metricsql';
 import { VectorMatchCardinality, VectorMatching } from '../types';
 import { containsAtLeastOneChild } from './path-finder';
 

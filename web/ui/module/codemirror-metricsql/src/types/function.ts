@@ -202,7 +202,7 @@ import {
   AvgWeekly,
   MedianWeekly,
   MedianWeeklyWithTrends,
-} from '@clavinjune/lezer-metricsql';
+} from '@skbkontur-moira/lezer-metricsql';
 
 export enum ValueType {
   none = 'none',
@@ -906,7 +906,9 @@ export function getFunction(id: number): PromQLFunction {
 }
 
 export function isFunctionBypassed(id: number): boolean {
-  return id === Alias || id === HistogramQuantiles ||
+  return (
+    id === Alias ||
+    id === HistogramQuantiles ||
     id === Integrate ||
     id === Interpolate ||
     id === KeepLastValue ||
@@ -983,4 +985,5 @@ export function isFunctionBypassed(id: number): boolean {
     id === TminOverTime ||
     id === Union ||
     id === ZscoreOverTime
+  );
 }

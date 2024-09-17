@@ -12,7 +12,7 @@
 // limitations under the License.
 
 import { SyntaxNode } from '@lezer/common';
-import { EqlRegex, EqlSingle, LabelName, MatchOp, Neq, NeqRegex, StringLiteral } from '@clavinjune/lezer-metricsql';
+import { EqlRegex, EqlSingle, LabelName, MatchOp, Neq, NeqRegex, StringLiteral } from '@skbkontur-moira/lezer-metricsql';
 import { EditorState } from '@codemirror/state';
 import { Matcher } from '../types';
 

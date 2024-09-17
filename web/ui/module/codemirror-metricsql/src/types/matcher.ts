@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { EqlSingle, Neq } from '@clavinjune/lezer-metricsql';
+import { EqlSingle, Neq } from '@skbkontur-moira/lezer-metricsql';
 
 export class Matcher {
   type: number;

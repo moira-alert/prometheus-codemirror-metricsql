@@ -75,7 +75,7 @@ import {
   Unless,
   VectorSelector,
   Zscore,
-} from '@clavinjune/lezer-metricsql';
+} from '@skbkontur-moira/lezer-metricsql';
 import { containsAtLeastOneChild } from './path-finder';
 import { getType } from './type';
 import { buildLabelMatchers } from './matcher';
@@ -198,16 +198,17 @@ export class Parser {
       return;
     }
     // metricsql
-    if (aggregateOp.type.id === BottomkAvg ||
-        aggregateOp.type.id === BottomkMax ||
-        aggregateOp.type.id === BottomkMedian ||
-        aggregateOp.type.id === BottomkLast ||
-        aggregateOp.type.id === BottomkMin ||
-        aggregateOp.type.id === TopkAvg ||
-        aggregateOp.type.id === TopkMax ||
-        aggregateOp.type.id === TopkMedian ||
-        aggregateOp.type.id === TopkLast ||
-        aggregateOp.type.id === TopkMin
+    if (
+      aggregateOp.type.id === BottomkAvg ||
+      aggregateOp.type.id === BottomkMax ||
+      aggregateOp.type.id === BottomkMedian ||
+      aggregateOp.type.id === BottomkLast ||
+      aggregateOp.type.id === BottomkMin ||
+      aggregateOp.type.id === TopkAvg ||
+      aggregateOp.type.id === TopkMax ||
+      aggregateOp.type.id === TopkMedian ||
+      aggregateOp.type.id === TopkLast ||
+      aggregateOp.type.id === TopkMin
     ) {
       if (params.length < 2 || params.length > 3) {
         this.addDiagnostic(node, 'unable to find the parameter for the expression');
@@ -220,13 +221,10 @@ export class Parser {
       if (params.length === 3) {
         this.expectType(params[2], ValueType.string, 'aggregation parameter');
       }
-      return
+      return;
     }
 
-    if (aggregateOp.type.id === Limitk ||
-        aggregateOp.type.id === OutliersMad ||
-        aggregateOp.type.id === Outliersk
-    ) {
+    if (aggregateOp.type.id === Limitk || aggregateOp.type.id === OutliersMad || aggregateOp.type.id === Outliersk) {
       if (params.length != 2) {
         this.addDiagnostic(node, 'unable to find the parameter for the expression');
         return;
@@ -236,30 +234,31 @@ export class Parser {
 
     if (aggregateOp.type.id === Quantiles) {
       this.expectType(params[0], ValueType.string, 'aggregation parameter');
-      for(let i = 1; i < params.length-1; i++){
+      for (let i = 1; i < params.length - 1; i++) {
         this.expectType(params[i], ValueType.scalar, 'aggregation parameter');
       }
     }
 
-    if (aggregateOp.type.id === Any ||
-        aggregateOp.type.id === Avg ||
-        aggregateOp.type.id === Count ||
-        aggregateOp.type.id === Distinct ||
-        aggregateOp.type.id === Geomean ||
-        aggregateOp.type.id === Group ||
-        aggregateOp.type.id === Histogram ||
-        aggregateOp.type.id === Mad ||
-        aggregateOp.type.id === Max ||
-        aggregateOp.type.id === Median ||
-        aggregateOp.type.id === Min ||
-        aggregateOp.type.id === Mode ||
-        aggregateOp.type.id === Share ||
-        aggregateOp.type.id === Stddev ||
-        aggregateOp.type.id === Stdvar ||
-        aggregateOp.type.id === Sum ||
-        aggregateOp.type.id === Sum2 ||
-        aggregateOp.type.id === Sum2 ||
-        aggregateOp.type.id === Zscore
+    if (
+      aggregateOp.type.id === Any ||
+      aggregateOp.type.id === Avg ||
+      aggregateOp.type.id === Count ||
+      aggregateOp.type.id === Distinct ||
+      aggregateOp.type.id === Geomean ||
+      aggregateOp.type.id === Group ||
+      aggregateOp.type.id === Histogram ||
+      aggregateOp.type.id === Mad ||
+      aggregateOp.type.id === Max ||
+      aggregateOp.type.id === Median ||
+      aggregateOp.type.id === Min ||
+      aggregateOp.type.id === Mode ||
+      aggregateOp.type.id === Share ||
+      aggregateOp.type.id === Stddev ||
+      aggregateOp.type.id === Stdvar ||
+      aggregateOp.type.id === Sum ||
+      aggregateOp.type.id === Sum2 ||
+      aggregateOp.type.id === Sum2 ||
+      aggregateOp.type.id === Zscore
     ) {
       if (params.length != 1) {
         this.addDiagnostic(node, 'unable to find the parameter for the expression');
@@ -358,7 +357,7 @@ export class Parser {
     }
 
     if (isFunctionBypassed(funcID.type.id)) {
-      return
+      return;
     }
 
     const body = node.getChild(FunctionCallBody);

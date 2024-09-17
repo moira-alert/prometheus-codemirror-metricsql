@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { EqlRegex, EqlSingle, Neq, NeqRegex } from '@clavinjune/lezer-metricsql';
+import { EqlRegex, EqlSingle, Neq, NeqRegex } from '@skbkontur-moira/lezer-metricsql';
 import { labelMatchersToString } from './matcher';
 import { Matcher } from '../types';
 

@@ -1,5 +1,4 @@
-CodeMirror-metricsql
-=================
+# CodeMirror-metricsql
 
 This project provides a mode for [CodeMirror](https://codemirror.net/6/) that handles syntax highlighting, linting
 and autocompletion for MetricsQL ([VictoriaMetrics Query Language](https://docs.victoriametrics.com/MetricsQL.html)).
@@ -11,19 +10,19 @@ and autocompletion for MetricsQL ([VictoriaMetrics Query Language](https://docs.
 This mode is available as a npm package:
 
 ```bash
-npm install --save @clavinjune/codemirror-metricsql
+npm install --save @skbkontur-moira/codemirror-metricsql
 ```
 
 **Note:** You will have to manually install different packages that are part
 of [CodeMirror](https://codemirror.net/6/), as they are a peer dependency to this package. Here are the different
 packages you need to install:
 
-* **@codemirror/autocomplete**
-* **@codemirror/language**
-* **@codemirror/lint**
-* **@codemirror/state**
-* **@codemirror/view**
-* **@lezer/common**
+- **@codemirror/autocomplete**
+- **@codemirror/language**
+- **@codemirror/lint**
+- **@codemirror/state**
+- **@codemirror/view**
+- **@lezer/common**
 
 ```bash
 npm install --save @codemirror/autocomplete @codemirror/language @codemirror/lint @codemirror/state @codemirror/view @lezer/common
@@ -47,35 +46,35 @@ If you want to enjoy about the different features provided without taking too mu
 them, then the easiest way is this one:
 
 ```typescript
-import {PromQLExtension} from '@clavinjune/codemirror-metricsql';
-import {basicSetup} from '@codemirror/basic-setup';
-import {EditorState} from '@codemirror/state';
-import {EditorView} from '@codemirror/view';
+import { PromQLExtension } from '@skbkontur-moira/codemirror-metricsql';
+import { basicSetup } from '@codemirror/basic-setup';
+import { EditorState } from '@codemirror/state';
+import { EditorView } from '@codemirror/view';
 
-const promQL = new PromQLExtension()
+const promQL = new PromQLExtension();
 new EditorView({
-    state: EditorState.create({
-        extensions: [basicSetup, promQL.asExtension()],
-    }),
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    // tslint:disable-next-line:no-non-null-assertion
-    parent: document.getElementById('editor')!,
+  state: EditorState.create({
+    extensions: [basicSetup, promQL.asExtension()],
+  }),
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // tslint:disable-next-line:no-non-null-assertion
+  parent: document.getElementById('editor')!,
 });
 ```
 
 Using the default setup will activate:
 
-* syntax highlighting
-* an offline autocompletion that will suggest PromQL keywords such as functions / aggregations, depending on the
+- syntax highlighting
+- an offline autocompletion that will suggest PromQL keywords such as functions / aggregations, depending on the
   context.
-* an offline linter that will display PromQL syntax errors (which is closer to what Prometheus returns)
+- an offline linter that will display PromQL syntax errors (which is closer to what Prometheus returns)
 
 ### Deactivate autocompletion - linter
 
 In case you would like to deactivate the linter and/or the autocompletion it's simple as that:
 
 ```typescript
-const promQL = new PromQLExtension().activateLinter(false).activateCompletion(false) // here the linter and the autocomplete are deactivated
+const promQL = new PromQLExtension().activateLinter(false).activateCompletion(false); // here the linter and the autocomplete are deactivated
 ```
 
 ### Linter
@@ -98,7 +97,7 @@ By default, the limit is 10 000 metrics.
 Use it cautiously. A high value of this limit can cause a crash of your browser due to too many data fetched.
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({maxMetricsMetadata: 10000})
+const promQL = new PromQLExtension().setComplete({ maxMetricsMetadata: 10000 });
 ```
 
 #### Connect the autocompletion extension to a remote Prometheus server
@@ -117,7 +116,7 @@ Note: this is the only mandatory parameter in case you want to use the default P
 parameter, the rest of the config will be ignored, and the Prometheus client won't be initialized.
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({remote: {url: 'https://prometheus.land'}})
+const promQL = new PromQLExtension().setComplete({ remote: { url: 'https://prometheus.land' } });
 ```
 
 ###### Override FetchFn
@@ -126,7 +125,7 @@ In case your Prometheus server is protected and requires a special HTTP client, 
 that is used to perform any required HTTP request.
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({remote: {fetchFn: myHTTPClient}})
+const promQL = new PromQLExtension().setComplete({ remote: { fetchFn: myHTTPClient } });
 ```
 
 ###### Duration to use for looking back when retrieving metrics / labels
@@ -138,7 +137,7 @@ In case you would like to provide your own duration, you can override the variab
 value is `12 * 60 * 60 * 1000` (12h). The value must be defined in **milliseconds**.
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({remote: {lookbackInterval: 12 * 60 * 60 * 1000}})
+const promQL = new PromQLExtension().setComplete({ remote: { lookbackInterval: 12 * 60 * 60 * 1000 } });
 ```
 
 ###### Error Handling
@@ -147,7 +146,7 @@ You can set up your own error handler to catch any HTTP error that can occur whe
 Prometheus.
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({remote: {httpErrorHandler: (error: any) => console.error(error)}})
+const promQL = new PromQLExtension().setComplete({ remote: { httpErrorHandler: (error: any) => console.error(error) } });
 ```
 
 ###### HTTP method used
@@ -158,7 +157,7 @@ endpoints `/api/v1/labels` and `/api/v1/series`.
 You can change it to use the HTTP method `GET` if you prefer.
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({remote: {httpMethod: 'GET'}})
+const promQL = new PromQLExtension().setComplete({ remote: { httpMethod: 'GET' } });
 ```
 
 ###### Override the API Prefix
@@ -169,7 +168,7 @@ default `/api/v1`.
 You can override this value like this:
 
 ```typescript
-const promql = new PromQLExtension().setComplete({remote: {apiPrefix: '/my/api/prefix'}})
+const promql = new PromQLExtension().setComplete({ remote: { apiPrefix: '/my/api/prefix' } });
 ```
 
 ###### Cache
@@ -183,7 +182,7 @@ The data are stored in the cache for a limited amount of time defined by the var
 minutes. The value must be defined in **milliseconds**.
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({remote: {cache: {maxAge: 5 * 60 * 1000}}})
+const promQL = new PromQLExtension().setComplete({ remote: { cache: { maxAge: 5 * 60 * 1000 } } });
 ```
 
 ###### Initial Metric List
@@ -196,18 +195,18 @@ Note: keep in mind that this list will be kept into the embedded Prometheus clie
 
 ```typescript
 const promQL = new PromQLExtension().setComplete({
-    remote: {
-        cache: {
-            initialMetricList: [
-                'ALERTS',
-                'ALERTS_FOR_STATE',
-                'alertmanager_alerts',
-                'alertmanager_alerts_invalid_total',
-                'alertmanager_alerts_received_total',
-            ]
-        }
-    }
-})
+  remote: {
+    cache: {
+      initialMetricList: [
+        'ALERTS',
+        'ALERTS_FOR_STATE',
+        'alertmanager_alerts',
+        'alertmanager_alerts_invalid_total',
+        'alertmanager_alerts_received_total',
+      ],
+    },
+  },
+});
 ```
 
 ##### Override the default Prometheus client
@@ -217,7 +216,7 @@ interface [PrometheusClient](https://github.com/prometheus/codemirror-promql/blo
 .
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({remote: MyPrometheusClient})
+const promQL = new PromQLExtension().setComplete({ remote: MyPrometheusClient });
 ```
 
 #### Provide your own implementation of the autocompletion
@@ -225,15 +224,15 @@ const promQL = new PromQLExtension().setComplete({remote: MyPrometheusClient})
 In case you would like to provide you own implementation of the autocompletion, you can simply do it like that:
 
 ```typescript
-const promQL = new PromQLExtension().setComplete({completeStrategy: myCustomImpl})
+const promQL = new PromQLExtension().setComplete({ completeStrategy: myCustomImpl });
 ```
 
 Note: In case this parameter is provided, then the rest of the configuration is ignored.
 
 ### Example
 
-* [ReactJS example](https://github.com/prometheus/prometheus/blob/431ea75a11ca165dad9dd5d629b3cf975f4c186b/web/ui/react-app/src/pages/graph/CMExpressionInput.tsx)
-* [Angular example](https://github.com/perses/perses/blob/28b3bdac88b0ed7a4602f9c91106442eafcb6c34/internal/api/front/perses/src/app/project/prometheusrule/promql-editor/promql-editor.component.ts)
+- [ReactJS example](https://github.com/prometheus/prometheus/blob/431ea75a11ca165dad9dd5d629b3cf975f4c186b/web/ui/react-app/src/pages/graph/CMExpressionInput.tsx)
+- [Angular example](https://github.com/perses/perses/blob/28b3bdac88b0ed7a4602f9c91106442eafcb6c34/internal/api/front/perses/src/app/project/prometheusrule/promql-editor/promql-editor.component.ts)
 
 ## License
 

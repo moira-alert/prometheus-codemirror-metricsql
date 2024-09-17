@@ -52,7 +52,7 @@ import {
   SubqueryExpr,
   Unless,
   VectorSelector,
-} from '@clavinjune/lezer-metricsql';
+} from '@skbkontur-moira/lezer-metricsql';
 import { Completion, CompletionContext, CompletionResult } from '@codemirror/autocomplete';
 import { EditorState } from '@codemirror/state';
 import { buildLabelMatchers, containsAtLeastOneChild, containsChild, walkBackward } from '../parser';

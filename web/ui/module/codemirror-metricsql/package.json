@@ -1,6 +1,6 @@
 {
-  "name": "@clavinjune/codemirror-metricsql",
-  "version": "0.0.1-dev.3007240001",
+  "name": "@skbkontur-moira/codemirror-metricsql",
+  "version": "0.0.1-dev.1809240003",
   "description": "a CodeMirror mode for the MetricsQL language",
   "types": "dist/esm/index.d.ts",
   "module": "dist/esm/index.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clavinjune/prometheus-codemirror-metricsql.git"
+    "url": "git+https://github.com/moira-alert/prometheus-codemirror-metricsql.git"
   },
   "keywords": [
     "promql",
@@ -24,14 +24,9 @@
     "prometheus",
     "victoriametrics"
   ],
-  "author": "Clavin June <juneardoc@gmail.com>",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/clavinjune/prometheus-codemirror-metricsql/issues"
-  },
-  "homepage": "https://github.com/clavinjune/prometheus-codemirror-metricsql/blob/main/web/ui/module/codemirror-metricsql/README.md",
   "dependencies": {
-    "@clavinjune/lezer-metricsql": "0.0.1-dev.3007240001",
+    "@skbkontur-moira/lezer-metricsql": "0.0.1-dev.1809240003",
     "lru-cache": "^7.18.3"
   },
   "devDependencies": {

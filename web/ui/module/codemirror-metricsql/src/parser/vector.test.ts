@@ -13,7 +13,7 @@
 
 import { buildVectorMatching } from './vector';
 import { createEditorState } from '../test/utils-test';
-import { BinaryExpr } from '@clavinjune/lezer-metricsql';
+import { BinaryExpr } from '@skbkontur-moira/lezer-metricsql';
 import { syntaxTree } from '@codemirror/language';
 import { VectorMatchCardinality } from '../types';
 

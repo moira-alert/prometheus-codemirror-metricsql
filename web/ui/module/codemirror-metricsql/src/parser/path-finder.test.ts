@@ -27,7 +27,7 @@ import {
   Neq,
   Sub,
   VectorSelector,
-} from '@clavinjune/lezer-metricsql';
+} from '@skbkontur-moira/lezer-metricsql';
 import { createEditorState } from '../test/utils-test';
 import { containsAtLeastOneChild, containsChild, walkBackward } from './path-finder';
 import { SyntaxNode } from '@lezer/common';

@@ -26,7 +26,7 @@ import {
   numberTerms,
   snippets,
 } from './promql.terms';
-import { EqlSingle, Neq } from '@clavinjune/lezer-metricsql';
+import { EqlSingle, Neq } from '@skbkontur-moira/lezer-metricsql';
 import { syntaxTree } from '@codemirror/language';
 import { newCompleteStrategy } from './index';
 
